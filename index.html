@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שלי וידמן ששון | תיק פרויקטים ועבודות ב-GitHub</title>
+    
+    <!-- Meta tags for SEO & Social -->
+    <meta name="description" content="תיק הפרויקטים והעבודות של שלי וידמן ששון (shellywsas) - פיתוח מערכות Web, אפליקציות PWA, חדרי בריחה אינטראקטיביים, סימולציות EdTech ומשחקי רשת.">
+    <meta name="author" content="שלי וידמן ששון (Shelly Widman Sasson)">
+    
+    <!-- Google Fonts: Heebo & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        darkBg: '#090d16',
+                        cardBg: 'rgba(17, 24, 39, 0.75)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #080c14;
+            color: #f1f5f9;
+            min-height: 100vh;
+        }
+
+        /* Ambient glowing background */
+        .ambient-glow {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 12% 15%, rgba(124, 58, 237, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 88% 85%, rgba(14, 165, 233, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.7) 0%, rgba(8, 12, 20, 1) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Card styles with glassmorphism */
+        .project-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.45);
+            box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.25), 0 0 20px rgba(124, 58, 237, 0.1);
+            background: rgba(22, 32, 54, 0.85);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #c084fc 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* Modal backdrop blur */
+        .modal-backdrop {
+            background: rgba(4, 7, 15, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="relative selection:bg-purple-600 selection:text-white pb-24">
+
+    <!-- Glowing ambient background -->
+    <div class="ambient-glow"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 px-6 py-3.5 transition-all">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-500 to-sky-400 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-900/40">
+                    ש
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-black text-white tracking-tight flex items-center gap-2">
+                        שלי וידמן ששון
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">shellywsas</span>
+                    </h1>
+                    <span class="text-xs text-slate-400 font-medium block">פיתוח תוכנה ו-Web • תיק עבודות לראיונות</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="mailto:shelly.wsas@gmail.com" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-bold border border-slate-800 transition-all">
+                    <i data-lucide="mail" class="w-3.5 h-3.5 text-purple-400"></i>
+                    <span>אימייל</span>
+                </a>
+                
+                <a href="https://github.com/shellywsas" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 active:scale-95 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-purple-900/40">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    <span>GitHub Profile</span>
+                </a>
+
+                <button onclick="openShareModal()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all" title="שיתוף הפורטפוליו">
+                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 relative z-10">
+
+        <!-- Hero Section -->
+        <section class="text-center py-6 sm:py-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/60 text-purple-300 border border-purple-800/60 text-xs font-bold mb-4 shadow-sm">
+                <span>🚀</span> Showcase מקצועי • פרויקטי קוד פתוחים ועובדים
+            </div>
+            
+            <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
+                היצירות, המערכות והקוד של<br>
+                <span class="gradient-text">שלי וידמן ששון</span>
+            </h2>
+            
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed font-normal">
+                מאגר מובחר של פרויקטים מקוריים שפותחו מאפס: מאפליקציות PWA עשירות ומערכות הכנה לבגרויות (מדמ״ח, מתמטיקה ופיזיקה), דרך חדרי בריחה וירטואליים מותחים, ועד משחקי רשת מרובי משתתפים ויישומי אודיו חיים.
+            </p>
+
+            <!-- Metrics Bar -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-3xl mx-auto mt-8">
+                <div class="bg-slate-900/70 border border-slate-800 p-4 rounded-2xl text-center backdrop-blur-md">
+                    <div class="text-2xl sm:text-3xl font-black text-purple-400 font-outfit" id="stat-total">28</div>
+                    <div class="text-xs text-slate-400 font-medium mt-1">פרויקטים מובחרים</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800 p-4 rounded-2xl text-center backdrop-blur-md">
+                    <div class="text-2xl sm:text-3xl font-black text-sky-400 font-outfit">100%</div>
+                    <div class="text-xs text-slate-400 font-medium mt-1">Live Demos פעילים</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800 p-4 rounded-2xl text-center backdrop-blur-md">
+                    <div class="text-2xl sm:text-3xl font-black text-emerald-400 font-outfit">QR</div>
+                    <div class="text-xs text-slate-400 font-medium mt-1">סריקה מיידית לטלפון</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800 p-4 rounded-2xl text-center backdrop-blur-md">
+                    <div class="text-2xl sm:text-3xl font-black text-amber-400 font-outfit">5</div>
+                    <div class="text-xs text-slate-400 font-medium mt-1">פרויקטי דגל לראיון</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flagship Projects Section -->
+        <section class="mt-6 mb-12">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+                    <span>פרויקטי דגל נבחרים (Featured Highlights)</span>
+                </h3>
+                <span class="text-xs text-slate-500 font-medium">מומלץ במיוחד לראיונות</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="flagship-container">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Search & Category Controls Section -->
+        <section class="sticky top-[69px] z-30 py-3 bg-slate-950/90 backdrop-blur-md border-y border-slate-800/80 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-3 items-center justify-between">
+                
+                <!-- Category Buttons -->
+                <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none" id="categories-bar">
+                    <button onclick="setCategory('all')" id="cat-all" class="category-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-purple-600 text-white shrink-0 shadow-sm">
+                        הכל (<span id="count-all">0</span>)
+                    </button>
+                    <button onclick="setCategory('flagship')" id="cat-flagship" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-900/90 hover:bg-slate-800 text-slate-300 shrink-0 border border-slate-800">
+                        ⭐ דגל
+                    </button>
+                    <button onclick="setCategory('edtech')" id="cat-edtech" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-900/90 hover:bg-slate-800 text-slate-300 shrink-0 border border-slate-800">
+                        📚 EdTech ובגרויות
+                    </button>
+                    <button onclick="setCategory('escaperoom')" id="cat-escaperoom" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-900/90 hover:bg-slate-800 text-slate-300 shrink-0 border border-slate-800">
+                        🔐 חדרי בריחה
+                    </button>
+                    <button onclick="setCategory('games')" id="cat-games" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-900/90 hover:bg-slate-800 text-slate-300 shrink-0 border border-slate-800">
+                        🎮 משחקים וסאונד
+                    </button>
+                    <button onclick="setCategory('tools')" id="cat-tools" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-900/90 hover:bg-slate-800 text-slate-300 shrink-0 border border-slate-800">
+                        🛠️ אפליקציות ו-PWA
+                    </button>
+                    <button onclick="setCategory('languages')" id="cat-languages" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-900/90 hover:bg-slate-800 text-slate-300 shrink-0 border border-slate-800">
+                        📖 שפות ופסיכומטרי
+                    </button>
+                </div>
+
+                <!-- Instant Search Input -->
+                <div class="relative w-full md:w-72">
+                    <span class="absolute inset-y-0 right-3 flex items-center text-slate-400 pointer-events-none">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                    </span>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        oninput="onSearchChange(this.value)"
+                        placeholder="חיפוש פרויקט, שפה או טכנולוגיה..." 
+                        class="w-full pr-9 pl-8 py-2 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 transition-colors"
+                    >
+                    <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 left-2.5 flex items-center text-slate-400 hover:text-white">
+                        <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Projects Grid -->
+        <section class="mt-8">
+            <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-2">
+                    <h3 class="text-sm font-bold text-slate-300 flex items-center gap-2">
+                        <i data-lucide="folder-git-2" class="w-4 h-4 text-purple-400"></i>
+                        <span>רשימת הפרויקטים המלאה</span>
+                    </h3>
+                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-950 text-purple-300 font-bold border border-purple-800/50" id="results-count">28</span>
+                </div>
+                <div class="text-xs text-slate-400 flex items-center gap-1.5">
+                    <i data-lucide="smartphone" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    <span>סרקו את ה-QR בכל כרטיסייה לטלפון</span>
+                </div>
+            </div>
+
+            <!-- Grid container -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically rendered by JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16 bg-slate-900/40 rounded-3xl border border-slate-800/80 mt-6">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-950/60 flex items-center justify-center text-purple-400 mb-3">
+                    <i data-lucide="search-x" class="w-7 h-7"></i>
+                </div>
+                <h4 class="text-base font-bold text-white">לא נמצאו פרויקטים התואמים לחיפוש</h4>
+                <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">נסי לחפש מילות מפתח אחרות (למשל: Java, PWA, פיזיקה, כדורעף, בריחה) או לאפס את הסינון.</p>
+                <button onclick="clearSearch()" class="mt-4 px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-bold transition-all">
+                    איפוס חיפוש והצגת כל הפרויקטים
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interview Deep Dive Modal -->
+    <div id="interview-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700/80 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeInterviewModal()" class="absolute top-5 left-5 p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex items-start gap-4 mb-6">
+                <div class="w-14 h-14 rounded-2xl bg-purple-950/80 border border-purple-800/60 flex items-center justify-center text-3xl shrink-0" id="modal-icon">
+                    🚀
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-purple-900/50 text-purple-300 border border-purple-700/50" id="modal-cat">EdTech</span>
+                        <span class="text-[11px] font-mono text-slate-400" id="modal-lang">JavaScript</span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-black text-white" id="modal-title">שם הפרויקט</h3>
+                </div>
+            </div>
+
+            <!-- Content sections -->
+            <div class="space-y-4 text-xs sm:text-sm text-slate-300">
+                <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-purple-400 mb-1 flex items-center gap-1.5 text-xs sm:text-sm">
+                        <i data-lucide="target" class="w-4 h-4"></i>
+                        <span>על מה הפרויקט ואיזו בעיה הוא פותר?</span>
+                    </h4>
+                    <p class="leading-relaxed text-slate-300" id="modal-problem"></p>
+                </div>
+
+                <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-sky-400 mb-1 flex items-center gap-1.5 text-xs sm:text-sm">
+                        <i data-lucide="cpu" class="w-4 h-4"></i>
+                        <span>ארכיטקטורה וטכנולוגיות (Tech Stack)</span>
+                    </h4>
+                    <p class="leading-relaxed text-slate-300" id="modal-stack"></p>
+                    <div class="flex flex-wrap gap-1.5 mt-3" id="modal-tags"></div>
+                </div>
+
+                <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5 text-xs sm:text-sm">
+                        <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                        <span>נקודות מפתח להסבר בראיון (Highlights & Challenges)</span>
+                    </h4>
+                    <p class="leading-relaxed text-slate-300" id="modal-highlights"></p>
+                </div>
+
+                <!-- QR Scan Section inside Modal -->
+                <div class="bg-gradient-to-r from-purple-950/40 to-slate-950/80 p-4 rounded-2xl border border-purple-800/40 flex flex-col sm:flex-row items-center gap-4">
+                    <div class="p-2 bg-white rounded-xl shrink-0 shadow-lg">
+                        <img id="modal-qr" src="" alt="QR" class="w-24 h-24 object-contain">
+                    </div>
+                    <div class="text-center sm:text-right">
+                        <div class="font-bold text-white text-xs sm:text-sm">בדיקה חיה בסמארטפון</div>
+                        <div class="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                            סרקו את הברקוד עכשיו עם מצלמת הטלפון כדי לפתוח את האפליקציה החיה ישירות במכשיר!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action buttons inside Modal -->
+            <div class="flex items-center gap-3 mt-6 pt-5 border-t border-slate-800">
+                <a id="modal-live-btn" href="" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-900/40 active:scale-95">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    <span>פתיחת האתר / אפליקציה (Live Demo)</span>
+                </a>
+                <a id="modal-repo-btn" href="" target="_blank" rel="noopener noreferrer" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 border border-slate-700 active:scale-95">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    <span>קוד ב-GitHub</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- QR Code Fullscreen Modal -->
+    <div id="qr-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4" onclick="closeQrModal()">
+        <div class="bg-slate-900 border border-slate-700/80 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeQrModal()" class="absolute top-4 left-4 p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <div class="w-10 h-10 rounded-xl bg-purple-950 text-purple-400 flex items-center justify-center mx-auto mb-3">
+                <i data-lucide="qr-code" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-base font-bold text-white" id="qr-modal-title">סריקת אפליקציה לטלפון</h4>
+            <p class="text-xs text-slate-400 mt-1 mb-5">כוונו את מצלמת הסמארטפון כדי לפתוח את האפליקציה מיד</p>
+            <div class="p-3 bg-white rounded-2xl shadow-xl inline-block mx-auto">
+                <img id="qr-modal-img" src="" alt="QR" class="w-56 h-56 object-contain">
+            </div>
+            <div class="mt-5">
+                <a id="qr-modal-link" href="" target="_blank" class="text-xs font-bold text-purple-400 hover:text-purple-300 underline block truncate max-w-xs mx-auto"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4" onclick="closeShareModal()">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeShareModal()" class="absolute top-4 left-4 p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <div class="w-10 h-10 rounded-xl bg-purple-950 text-purple-400 flex items-center justify-center mx-auto mb-3">
+                <i data-lucide="share-2" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-base font-bold text-white">שיתוף תיק העבודות</h4>
+            <p class="text-xs text-slate-400 mt-1 mb-4">העתיקו את הקישור או סרקו כדי לפתוח במכשיר נייד</p>
+            <div class="p-3 bg-white rounded-2xl shadow-xl inline-block mx-auto mb-4">
+                <img id="share-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fshellywsas.github.io&margin=8" alt="Portfolio QR" class="w-48 h-48 object-contain">
+            </div>
+            <div class="flex items-center gap-2 bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <input type="text" id="share-url-input" value="https://shellywsas.github.io" readonly class="bg-transparent text-xs text-slate-300 flex-1 outline-none font-mono">
+                <button onclick="copyShareUrl()" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-bold shrink-0 transition-all flex items-center gap-1">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                    <span id="copy-btn-text">העתק</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-24 border-t border-slate-800/80 py-10 text-center text-xs text-slate-400 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-right sm:text-right">
+                <p class="font-bold text-slate-300">שלי וידמן ששון • Shelly Widman Sasson</p>
+                <p class="text-[11px] text-slate-400 mt-0.5">כל הפרויקטים פותחו באופן עצמאי וזמינים לצפייה ושימוש ב-GitHub</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/shellywsas" target="_blank" class="hover:text-purple-400 transition-colors flex items-center gap-1.5">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    <span>github.com/shellywsas</span>
+                </a>
+                <span class="text-slate-700">•</span>
+                <a href="mailto:shelly.wsas@gmail.com" class="hover:text-purple-400 transition-colors flex items-center gap-1.5">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    <span>shelly.wsas@gmail.com</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Data & Script -->
+    <script>
+        const projects = [
+            // FLAGSHIP
+            {
+                id: "studystreak-pro",
+                name: "tryingTOstudy",
+                title: "StudyStreak Pro",
+                subtitle: "מערכת ניהול למידה חכמה לבגרויות (PWA)",
+                icon: "📚",
+                isFlagship: true,
+                category: "flagship",
+                lang: "JavaScript / PWA",
+                theme: "purple",
+                desc: "אפליקציית PWA מתקדמת ואינטראקטיבית לניהול הרגלי למידה לקראת בחינות הבגרות: מנוע חלונות זמן אוטומטי (Smart Windows), ארכיון תרגילים קשים, מנגנון סטרייק יומי, והתראות חכמות.",
+                tags: ["PWA", "React", "Mobile-First", "Local Storage", "EdTech"],
+                liveUrl: "https://shellywsas.github.io/tryingTOstudy2/",
+                repoUrl: "https://github.com/shellywsas/tryingTOstudy",
+                interview: {
+                    problem: "תלמידים מתקשים לשמור על רצף למידה לבגרויות ומוצפים בעומס ללא חלוקה מבוקרת של הזמן או שמירה מסודרת של שאלות שנכשלו בהן.",
+                    stack: "JavaScript מודרני, ארכיטקטורת PWA להתקנה על הסמארטפון כמסך בית, תמיכה באופליין (Service Workers), שמירת נתונים מבוססת LocalStorage עם מנגנון ייצוא וגיבוי.",
+                    highlights: "פיתוח אלגוריתם חלונות למידה דינמי המתאים את זמני המנוחה לרמת הקושי של המקצוע, ורספונסיביות מלאה למובייל ללא צורך בהתקנת חנות אפליקציות."
+                }
+            },
+            {
+                id: "node-master",
+                name: "node-master-bagrut",
+                title: "NodeMaster - שרשרת חוליות ב-Java",
+                subtitle: "כלי ויזואלי אינטראקטיבי להבנת מבני נתונים לבגרות במדמ״ח",
+                icon: "🧬",
+                isFlagship: true,
+                category: "flagship",
+                lang: "JavaScript / Java CS",
+                theme: "indigo",
+                desc: "פלטפורמה חינוכית אינטראקטיבית הממחישה ויזואלית ומעשית את עקרונות שרשרת חוליות (Node<T>) ב-Java לבגרות במדעי המחשב: הכנסה, מחיקה, סריקה, רקורסיה ואתגרי אלגוריתמיקה מונפשים בזמן אמת.",
+                tags: ["Java", "Data Structures", "Linked Lists", "Visualizer", "Algorithms"],
+                liveUrl: "https://shellywsas.github.io/node-master-bagrut/",
+                repoUrl: "https://github.com/shellywsas/node-master-bagrut",
+                interview: {
+                    problem: "שרשרת חוליות ורקורסיה הם הנושאים המופשטים והמאתגרים ביותר עבור תלמידי תיכון במדעי המחשב, שלרוב לומדים רק מול קוד טקסטואלי ללא משוב חזותי.",
+                    stack: "HTML5 Canvas & SVG, מנוע JavaScript ייעודי להדמיית מצבי זיכרון ומצביעים (Pointers & References), מבחן סימולציה עם שאלות בגרות וקומפילציית לוגיקה חיה.",
+                    highlights: "בניית מנוע הנפשת מצביעים שמראה צעד-אחר-צעד מה קורה ל-next ולערך החוליה, כולל זיהוי שגיאות נפוצות כמו איבוד שרשרת (NullPointerException simulation)."
+                }
+            },
+            {
+                id: "libifit",
+                name: "libbyfit",
+                title: "LibiFit",
+                subtitle: "יומן אימונים וכושר PWA מותאם אישית",
+                icon: "🏐",
+                isFlagship: true,
+                category: "flagship",
+                lang: "JavaScript / PWA",
+                theme: "sky",
+                desc: "אפליקציית PWA מתקדמת לאימונים ולמעקב ספורטיבי: יומן שבועי צבעוני בסגנון Google Calendar, מודול ייעודי לכדורעף וחדר כושר, טבלאות סטים עם טיימר מנוחה קולי, מעקב שיאים אישיים (PRs) ומדד התאוששות יומי.",
+                tags: ["PWA", "Fitness Tracker", "Timer & Audio", "JSON Backup", "UI/UX"],
+                liveUrl: "https://shellywsas.github.io/libbyfit/",
+                repoUrl: "https://github.com/shellywsas/libbyfit",
+                interview: {
+                    problem: "אפליקציות כושר מסחריות עמוסות בפרסומות, אינן מותאמות לשילוב של ספורט קבוצתי (כדורעף) יחד עם חדר כושר, ומסורבלות ברישום סטים בזמן אימון.",
+                    stack: "וונילה JS מודרני מונחה ביצועים, רספונסיביות מלאה, PWA Manifest, Web Audio API לצלילי התראה בסיום זמני מנוחה, ומנגנון ייצוא/ייבוא JSON מובנה.",
+                    highlights: "מערכת ניהול סטים מהירה במיוחד עם צ'קבוקסים מהירים, לוח מעקב שיאים אישיים שמחשב אוטומטית עלייה במשקלים, וסקר התאוששות גרדיאנטי."
+                }
+            },
+            {
+                id: "project-synapse",
+                name: "scary-escape-room",
+                title: "Project Synapse: Facility 0",
+                subtitle: "חדר בריחה אינטראקטיבי ריאליסטי ומותח",
+                icon: "🔦",
+                isFlagship: true,
+                category: "flagship",
+                lang: "HTML / JS / Audio",
+                theme: "rose",
+                desc: "משחק מתח וחדר בריחה מבוסס דפדפן המשלב זירת חקירה משטרתית ומעבדה סודית: אלומת פנס דינמית מבוססת עכבר בחדר חשוך, מוקד CCTV בלייב עם דמות החוקרת, ומנוע Web Audio ריאליסטי.",
+                tags: ["Escape Room", "Dynamic Flashlight", "Web Audio API", "CCTV Simulation", "Interactive"],
+                liveUrl: "https://shellywsas.github.io/scary-escape-room/",
+                repoUrl: "https://github.com/shellywsas/scary-escape-room",
+                interview: {
+                    problem: "יצירת חוויית חדר בריחה סוחפת ומפחידה ב-Web ללא שימוש במנועי תלת-ממד כבדים (כמו Unity/Unreal), תוך שמירה על ביצועים גבוהים וזמני טעינה מיידיים.",
+                    stack: "HTML5 Canvas Masking לאלומת הפנס המדויקת העוקבת אחרי תנועת הסמן, Web Audio API ליצירת מתח דינמי וצלילי סביבה, ומכונת מצבים (FSM) לניהול שלבי החידות.",
+                    highlights: "שילוב בין ממשק אבטחה טכנולוגי (מצלמות CCTV מתחלפות) לבין חידות הצפנה ולוגיקה, עם מערכת רמזים דינמית שמגיבה לקצב השחקן."
+                }
+            },
+            {
+                id: "series-hub",
+                name: "series-hub",
+                title: "SeriesHub Streaming",
+                subtitle: "פלטפורמת סטרימינג וניהול מדיה דמוית Netflix",
+                icon: "🎬",
+                isFlagship: true,
+                category: "flagship",
+                lang: "Python / Web",
+                theme: "red",
+                desc: "אפליקציית Web ומנהל מדיה פרטי לסדרות וסרטים: ממשק משתמש קולנועי מרהיב בהשראת נטפליקס, נגן וידאו מובנה עם שמירת נקודת צפייה, קטלוג עונות ופרקים, וחיפוש מהיר.",
+                tags: ["Python", "Streaming", "Video Player", "Media Hub", "Netflix UI"],
+                liveUrl: "https://shellywsas.github.io/series-hub/",
+                repoUrl: "https://github.com/shellywsas/series-hub",
+                interview: {
+                    problem: "צורך בממשק מרכזי ואלגנטי לניהול קובצי וידאו, פרקים של סדרות וצפייה ישירה מכל מכשיר בבית עם זכירת היסטוריית צפייה.",
+                    stack: "Python Backend, HTML5 Video API, עיצוב UI מודרני מבוסס Tailwind ו-CSS Grid, וקטלוג מטא-דאטה.",
+                    highlights: "עיצוב חוויית משתמש (UX) ברמת מוצר מסחרי עם באנר Hero מתחלף, קטגוריות נגללות אופקית (Carousels), ומעקב התקדמות בפרקים."
+                }
+            },
+
+            // EDTECH & BAGRUT
+            {
+                id: "math-5units",
+                name: "math-5units-bagrut",
+                title: "מתמטיקה 5 יח״ל לבגרות",
+                subtitle: "פונקציות מעריכיות ומספרים מרוכבים עם הדפסת A4",
+                icon: "📐",
+                category: "edtech",
+                lang: "HTML / JS / CSS",
+                theme: "sky",
+                desc: "אתר הכנה מקיף לשאלוני 582 ו-581 בבגרות במתמטיקה: סיכומים עיוניים מסודרים, סימולטור אינטראקטיבי לגרפים וחקירת פונקציות, והתאמה מושלמת להדפסת חוברות תרגול נקייה על דפי A4.",
+                tags: ["מתמטיקה 5 יח״ל", "חדו״א", "A4 Print Layout", "סימולטור גרפים"],
+                liveUrl: "https://shellywsas.github.io/math-5units-bagrut/",
+                repoUrl: "https://github.com/shellywsas/math-5units-bagrut",
+                interview: {
+                    problem: "תלמידים מתקשים למצוא סיכומים ברורים וממוקדים ל-5 יח״ל שנוח גם לקרוא במסך וגם להדפיס כדפי עבודה נקיים ללא שבירת עיצוב.",
+                    stack: "CSS Paged Media (`@media print`) מותאם בדיוק למידות A4, מנוע שרטוט פונקציות ונוסחאות מתמטיות, ועיצוב נקי וברור.",
+                    highlights: "הפרדה מושלמת בין תצוגת מסך אינטראקטיבית לבין תבנית הדפסה מקצועית המונעת גלישת שורות ומייצרת דפי עזר מוכנים לבחינה."
+                }
+            },
+            {
+                id: "coulomb-law",
+                name: "coulomb-law-physics",
+                title: "פיזיקה - חוק קולון וחשמל סטטי",
+                subtitle: "למידה אינטראקטיבית וסימולציה לכיתה י״ב",
+                icon: "⚡",
+                category: "edtech",
+                lang: "HTML / JS",
+                theme: "amber",
+                desc: "סביבת למידה אינטראקטיבית לתלמידי פיזיקה 5 יח״ל: כוחות חשמליים בין מטענים נקודתיים, יישום חוק ניוטון השלישי, חישוב וקטורי של כוחות (סופרפוזיציה), ותרגול פתרון מודרך.",
+                tags: ["פיזיקה 5 יח״ל", "חשמל ומגנטיות", "סימולציה", "וקטורים"],
+                liveUrl: "https://shellywsas.github.io/coulomb-law-physics/",
+                repoUrl: "https://github.com/shellywsas/coulomb-law-physics",
+                interview: {
+                    problem: "המחשת כוחות בלתי-נראים בפיזיקה (וקטורים ומשוואות חשמל) מהווה מחסום הבנה משמעותי לתלמידים רבים.",
+                    stack: "חישובים וקטוריים מתמטיים בזמן אמת ב-JavaScript, ויזואליזציית כוחות דינמית והצגת וקטורים.",
+                    highlights: "משוב מיידי בפתרון שאלות שלב-אחר-שלב המונע גרירת טעויות חישוביות בהמרת יחידות ומיקומים."
+                }
+            },
+            {
+                id: "phis-bagrut",
+                name: "phis.bagrut",
+                title: "בגרות מלאה במכניקה",
+                subtitle: "סימולציית בחינה מותאמת למיקוד תשפ״ו",
+                icon: "🪐",
+                category: "edtech",
+                lang: "HTML / JS",
+                theme: "purple",
+                desc: "פורטל סימולציה ותרגול מעשי לבחינת הבגרות בפיזיקה - מכניקה: שאלות מתכונת מלאות, קינמטיקה, דינמיקה, אנרגיה ותנע עם פתרונות מפורטים.",
+                tags: ["פיזיקה", "מכניקה", "סימולציית בגרות", "משוב מיידי"],
+                liveUrl: "https://shellywsas.github.io/phis.bagrut/",
+                repoUrl: "https://github.com/shellywsas/phis.bagrut",
+                interview: {
+                    problem: "הצורך בסביבת סימולציה מציאותית המדמה את תנאי בחינת הבגרות במכניקה ומאפשרת בדיקה עצמית מיידית.",
+                    stack: "HTML5, CSS3, JavaScript אינטראקטיבי עם מערכת בדיקת תשובות וניתוח טעויות.",
+                    highlights: "מבנה מודולרי המחלק את המבחן לפרקים ומאפשר לתלמיד לזהות בדיוק באיזה נושא הוא מתקשה."
+                }
+            },
+            {
+                id: "help-in-physics",
+                name: "helpINphysics",
+                title: "עוזר הפיזיקה האינטראקטיבי",
+                subtitle: "משחוק ותרגול חווייתי לעקרונות פיזיקליים",
+                icon: "🧲",
+                category: "edtech",
+                lang: "HTML / JS",
+                theme: "blue",
+                desc: "פלטפורמת עזר ותרגול המשלבת משחוק (Gamification) להבנת מושגי יסוד בפיזיקה, חוקי שימור ונוסחאות מפתח דרך אתגרים קצרים.",
+                tags: ["Gamification", "פיזיקה", "הבנה מושגית", "אינטראקטיבי"],
+                liveUrl: "https://shellywsas.github.io/helpINphysics/",
+                repoUrl: "https://github.com/shellywsas/helpINphysics",
+                interview: {
+                    problem: "הורדת רמת החרדה מלימודי פיזיקה והפיכת השינון של מושגי יסוד לפעילות מהנה.",
+                    stack: "וונילה JS, מנגנון ניקוד וטיימר, ואנימציות CSS קלילות.",
+                    highlights: "נגישות מיידית מכל דפדפן ללא התקנה."
+                }
+            },
+            {
+                id: "os-dictionary",
+                name: "os",
+                title: "מערכות הפעלה - למידה ומשחק",
+                subtitle: "מילון מונחי ליבה וחידון אינטראקטיבי במערכות הפעלה",
+                icon: "🖥️",
+                category: "edtech",
+                lang: "HTML / JS",
+                theme: "slate",
+                desc: "פורטל לימודי המרכז מושגי מפתח בארכיטקטורת מערכות הפעלה (תהליכים, Threads, זיכרון וירטואלי, Deadlock, ניהול קבצים) לצד חידון אינטראקטיבי לבחינת הידע.",
+                tags: ["Operating Systems", "Computer Science", "מילון מושגים", "חידון"],
+                liveUrl: "https://shellywsas.github.io/os/",
+                repoUrl: "https://github.com/shellywsas/os",
+                interview: {
+                    problem: "מושגי מערכות הפעלה כוללים שפה מקצועית מורכבת שקשה לשלוט בה ללא סיכום מסודר ותרגול פעיל.",
+                    stack: "JavaScript, ארגון נתונים מבוסס JSON של מושגים וקטגוריות, מנוע סינון מהיר לפי אותיות ומילות מפתח.",
+                    highlights: "חידון המציג שאלות אמריקאיות עם הסברים עמוקים לכל אפשרות, מתאים במיוחד להכנה למבחנים אקדמיים ותיכוניים."
+                }
+            },
+
+            // ESCAPE ROOMS
+            {
+                id: "nvc-escape",
+                name: "nvc-escape-room",
+                title: "ממלכת הלב - תקשורת מקרבת",
+                subtitle: "חדר בריחה וירטואלי ללימוד שפת הג'ירף",
+                icon: "🦒",
+                category: "escaperoom",
+                lang: "JavaScript",
+                theme: "emerald",
+                desc: "חדר בריחה אינטראקטיבי ערכי המלמד את עקרונות התקשורת המקרבת (NVC): זיהוי הבחנה בין תצפית לשיפוט, ביטוי רגשות וצרכים, הקשבה אמפתית ודמויות ג'ירי וג'קי.",
+                tags: ["חדר בריחה", "תקשורת מקרבת", "שפת הג'ירף", "חינוך ערכי"],
+                liveUrl: "https://shellywsas.github.io/nvc-escape-room/",
+                repoUrl: "https://github.com/shellywsas/nvc-escape-room",
+                interview: {
+                    problem: "תקשורת מקרבת נלמדת בדרך כלל בהרצאות פרונטליות יבשות; הפרויקט הופך את הנושא למשחק חידות עלילתי ומרתק.",
+                    stack: "JavaScript, אלמנטים גרפיים אינטראקטיביים, מערכת ניהול עלילה לפי שלבים (Step-based progression).",
+                    highlights: "שילוב בין דילמות רגשיות לחידות לוגיות, המאפשר לשחקן לחוות הלכה למעשה את המעבר מ'שפת התן' ל'שפת הג'ירף'."
+                }
+            },
+            {
+                id: "volleyball-escape",
+                name: "volleyball_escapeRoom",
+                title: "שריקת הפתיחה - חדר בריחה כדורעף",
+                subtitle: "הרפתקת חידות טקטית בעולם הכדורעף",
+                icon: "🏐",
+                category: "escaperoom",
+                lang: "HTML / JS",
+                theme: "teal",
+                desc: "חדר בריחה עשיר ומאתגר (מעל 60KB קוד): פענוח מערכי שחקנים במגרש, רוטציות וסיבובים, חוקי שיפוט בינלאומיים, הצפנות ורמזים שחבויים בציוד הספורט.",
+                tags: ["כדורעף", "חדר בריחה", "חוקי משחק", "טקטיקה"],
+                liveUrl: "https://shellywsas.github.io/volleyball_escapeRoom/",
+                repoUrl: "https://github.com/shellywsas/volleyball_escapeRoom",
+                interview: {
+                    problem: "העברת ידע טקטי ומקצועי של ספורט הכדורעף דרך חוויית גיימינג מאתגרת ולא שגרתית.",
+                    stack: "JavaScript, מערכת חידות תלוית מצב (State Machine), אנימציות CSS וגרפיקה מותאמת.",
+                    highlights: "חידות הדורשות הבנה של מיקום שחקנים על המגרש וסימוני שופט אמיתיים, שנוסו בהצלחה בקרב קבוצות שחקנים."
+                }
+            },
+            {
+                id: "horror-escape",
+                name: "Horror.escapeRoom",
+                title: "המוסד הנטוש - חדר בריחה",
+                subtitle: "מותחן פסיכולוגי אינטראקטיבי בדפדפן",
+                icon: "🏚️",
+                category: "escaperoom",
+                lang: "HTML / JS",
+                theme: "red",
+                desc: "חדר בריחה באווירת אימה ומסתורין: פענוח רמזים בחדרים חשוכים, פתיחת מנעולים קומבינטוריים, מציאת מפתחות ופתרון חידות תחת תחושת לחץ זמן.",
+                tags: ["אימה", "חדר בריחה", "חידות הגיון", "מנעולים דיגיטליים"],
+                liveUrl: "https://shellywsas.github.io/Horror.escapeRoom/",
+                repoUrl: "https://github.com/shellywsas/Horror.escapeRoom",
+                interview: {
+                    problem: "בניית מתח עלילתי ועיצוב סביבה סוחפת בדפדפן תוך שימוש באלמנטים ויזואליים ופסיכולוגיים.",
+                    stack: "HTML5/CSS3, מנוע אינטראקציות DOM עשיר, ניהול אינוונטר (Inventory System) לחפצים שנאספים בחדר.",
+                    highlights: "מערכת מנעולים דיגיטלית המדמה מנעולי קוד אמיתיים עם בדיקת שילובים ומשוב חזותי."
+                }
+            },
+            {
+                id: "history-room-2",
+                name: "historyRoom2",
+                title: "ארכיון הזמן: בגרות בהיסטוריה",
+                subtitle: "חדר בריחה היסטורי ופענוח צפנים",
+                icon: "🏛️",
+                category: "escaperoom",
+                lang: "HTML / JS",
+                theme: "amber",
+                desc: "חדר בריחה המנגיש אירועים היסטוריים מורכבים דרך הצפנות, פענוח מברקים סודיים, התאמת תאריכים ותהליכים מדיניים מתוך תוכנית הלימודים לבגרות.",
+                tags: ["היסטוריה", "חדר בריחה", "הצפנות", "EdTech"],
+                liveUrl: "https://shellywsas.github.io/historyRoom2/",
+                repoUrl: "https://github.com/shellywsas/historyRoom2",
+                interview: {
+                    problem: "שינון תאריכים ועובדות היסטוריות בדרך כלל נתפס כמשעמם ופסיבי; הפרויקט הופך את התלמיד לחוקר הפותר תעלומה היסטורית.",
+                    stack: "מנוע חידות JavaScript, מסמכים היסטוריים דיגיטליים אינטראקטיביים ומנגנון הצפנה (Cypher decoding).",
+                    highlights: "תכנון מסלול פתרון שמחייב הבנה של סיבה ותוצאה בהיסטוריה ולא רק שינון עיוור."
+                }
+            },
+
+            // GAMES & SOUND
+            {
+                id: "israeli-music",
+                name: "israeli-music-quiz",
+                title: "חידון המוזיקה הישראלית 🎵🇮🇱",
+                subtitle: "זיהוי שירים מכל הזמנים עם מנוע הקראה קולית חיה",
+                icon: "🎤",
+                category: "games",
+                lang: "JavaScript / Web Speech",
+                theme: "sky",
+                desc: "משחק מוזיקלי ישראלי סוחף: זיהוי שירים ויוצרים מכל העשורים, כולל הקראה קולית חיה של מילות השירים באמצעות Web Speech Synthesis API, ניקוד ורמות קושי.",
+                tags: ["Web Speech API", "Audio", "מוזיקה ישראלית", "Speech Synthesis", "Trivia"],
+                liveUrl: "https://shellywsas.github.io/israeli-music-quiz/",
+                repoUrl: "https://github.com/shellywsas/israeli-music-quiz",
+                interview: {
+                    problem: "חידוני טריוויה מוזיקליים ברשת לרוב מבוססים על טקסט יבש בלבד; הפרויקט מביא 'קריינות חיה' של מילות השירים ישירות מהדפדפן ללא צורך בהקלטות שרת.",
+                    stack: "JavaScript, Web Speech Synthesis API עם התאמת מבטא עברי ומהירות דיבור, מנוע ניקוד מבוסס זמן ורצף.",
+                    highlights: "שימוש מתקדם ב-Web Speech API לסינתוז דיבור עברי חלק, כולל טיפול בסימני פיסוק והשהיות לטובת חוויית משחק קצבית."
+                }
+            },
+            {
+                id: "double-trivia-online",
+                name: "double-trivia-2.0",
+                title: "Double Trivia 2.0",
+                subtitle: "משחק טריוויה אסטרטגי מרובה משתתפים",
+                icon: "🧠",
+                category: "games",
+                lang: "JavaScript",
+                theme: "violet",
+                desc: "משחק טריוויה אסטרטגי ומהיר לשחקן יחיד או זוגות: שאלות ידע כללי תחת לחץ זמנים, שילוב זיכרון חזותי וצבירת נקודות בונוס.",
+                tags: ["Multiplayer", "טריוויה", "זמן אמת", "משחקי רשת"],
+                liveUrl: "https://shellywsas.github.io/double-trivia-2.0/",
+                repoUrl: "https://github.com/shellywsas/double-trivia-2.0",
+                interview: {
+                    problem: "פיתוח משחק טריוויה דינמי שבו התשובה המהירה ביותר והאסטרטגיה קובעות את הניצחון.",
+                    stack: "JavaScript, טיימרים מדויקים, מחולל שאלות אקראיות ללא חזרות, ועיצוב תגובתי לכל מכשיר.",
+                    highlights: "מבנה מודולרי המאפשר להוסיף חבילות שאלות חדשות בקלות דרך מערכי נתונים."
+                }
+            },
+            {
+                id: "family-night",
+                name: "family-game-night",
+                title: "ערב משחק משפחתי 🎉",
+                subtitle: "מי מכיר את מי & הכרעת הרוב",
+                icon: "🥳",
+                category: "games",
+                lang: "JavaScript",
+                theme: "pink",
+                desc: "פלטפורמת משחק חברתית אינטראקטיבית למפגשים משפחתיים: הצבעות בזמן אמת, משחק 'הכרעת הרוב', שאלות התאמה בין משתתפים והצגת תוצאות גרפית משעשעת.",
+                tags: ["Social Game", "משחק חברתי", "הצבעות", "UI/UX"],
+                liveUrl: "https://shellywsas.github.io/family-game-night/",
+                repoUrl: "https://github.com/shellywsas/family-game-night",
+                interview: {
+                    problem: "צורך במשחק גיבוש אינטראקטיבי פשוט שכל בני המשפחה מכל הגילאים יוכלו לשחק יחד ישירות מהטלפון או המחשב בסלון.",
+                    stack: "וונילה JS, אנימציות זכייה וזיקוקים, ממשק כפתורים ענקיים המותאם לסמארטפונים.",
+                    highlights: "מערכת ניהול סבבים דינמית המחשבת סטטיסטיקות משעשעות על הבחירות של המשתתפים."
+                }
+            },
+            {
+                id: "mom-shelly-battle",
+                name: "mom-and-shelly-battle",
+                title: "קרב הדורות 👩‍👧 - אמא מול שלי",
+                subtitle: "שעשועון סלנג, שירים, נוסטלגיה ו-AI",
+                icon: "⚡",
+                category: "games",
+                lang: "JavaScript",
+                theme: "rose",
+                desc: "שעשועון קרב דורות הומוריסטי וממכר: בדיקת היכרות עם סלנג של דור ה-Z לעומת מונחי עבר של ההורים, שירים נוסטלגיים, וחידות אינטליגנטיות מבוססות AI.",
+                tags: ["שעשועון", "AI", "סלנג", "נוסטלגיה", "דו קרב"],
+                liveUrl: "https://shellywsas.github.io/mom-and-shelly-battle/",
+                repoUrl: "https://github.com/shellywsas/mom-and-shelly-battle",
+                interview: {
+                    problem: "יצירת פורמט משחק המגשר על פערי דורות בהומור ובטכנולוגיה מתקדמת.",
+                    stack: "JavaScript, מנוע דו-קרב המציג לוח ניקוד חי ומצבי תורות מתחלפים, ממשק גרפי צבעוני ומזמין.",
+                    highlights: "אלגוריתם שאלות המאזן את הניקוד בין שני השחקנים לשמירה על מתח תחרותי עד הרגע האחרון."
+                }
+            },
+            {
+                id: "mom-shelly-show",
+                name: "mom-and-shelly-show",
+                title: "השעשועון הגדול 🎬🎵",
+                subtitle: "חידון סדרות נוער (גאליס, החממה) ושירים",
+                icon: "📺",
+                category: "games",
+                lang: "JavaScript",
+                theme: "purple",
+                desc: "חידון טריוויה עשיר המוקדש לסדרות הנוער האהובות (גאליס, החממה, השמיניה) ושירים: שאלות טריוויה, זיהוי פסקולים ומערכת ניקוד.",
+                tags: ["סדרות נוער", "טריוויה", "שעשועון", "מדיה"],
+                liveUrl: "https://shellywsas.github.io/mom-and-shelly-show/",
+                repoUrl: "https://github.com/shellywsas/mom-and-shelly-show",
+                interview: {
+                    problem: "משחק טריוויה קהילתי הממוקד בסדרות הנוער הישראליות הפופולריות.",
+                    stack: "JavaScript, HTML5, ניהול מצבי שלב ומשוב ויזואלי מונפש.",
+                    highlights: "ממשק קל ואינטואיטיבי המאפשר משחק חלק תוך שניות."
+                }
+            },
+            {
+                id: "beatstoria",
+                name: "Beatstoria",
+                title: "ביטסטוריה (Beatstoria)",
+                subtitle: "שילוב בין קצב ומוזיקה ללמידת היסטוריה",
+                icon: "🎧",
+                category: "games",
+                lang: "JavaScript",
+                theme: "fuchsia",
+                desc: "פרויקט יצירתי המחבר בין מקצבים מוזיקליים, שירים ודגימות שמע לבין זיהוי תקופות ואירועים היסטוריים לבגרות.",
+                tags: ["מוזיקה", "היסטוריה", "משחק קצבי", "Audio Cues"],
+                liveUrl: "https://shellywsas.github.io/Beatstoria/",
+                repoUrl: "https://github.com/shellywsas/Beatstoria",
+                interview: {
+                    problem: "רתימת הזיכרון המוזיקלי והשמיעתי של התלמידים לשינון ציר זמנים היסטורי.",
+                    stack: "JavaScript, HTML5 Audio, סנכרון תזמוני שמע עם שאלות על המסך.",
+                    highlights: "גישה פדגוגית חדשנית המחברת בין עולמות התוכן של מוזיקה ולימודים."
+                }
+            },
+            {
+                id: "snake-math",
+                name: "snake",
+                title: "סולמות ונחשים: לוח הכפל",
+                subtitle: "הרפתקת לוח אינטראקטיבית לילדים",
+                icon: "🎲",
+                category: "games",
+                lang: "HTML / JS",
+                theme: "emerald",
+                desc: "משחק לוח קלאסי של 'סולמות ונחשים' שעבר אדפטציה דיגיטלית מלאה: התקדמות על הלוח מותנית בפתרון תרגילי לוח הכפל, עם אנימציות קוביה והחלקה בסולמות ובנחשים.",
+                tags: ["משחק לוח", "לוח הכפל", "אנימציות", "EdTech לילדים"],
+                liveUrl: "https://shellywsas.github.io/snake/",
+                repoUrl: "https://github.com/shellywsas/snake",
+                interview: {
+                    problem: "לימוד ותרגול לוח הכפל לילדים באופן מעודד וחווייתי המונע תסכול.",
+                    stack: "CSS Grid לשרטוט הלוח, מנוע הטלת קוביה מונפש, ולוגיקת קידום שחקן לפי משבצות מיוחדות.",
+                    highlights: "מעל 57KB של לוגיקת משחק עצמאית בדפדפן הפועלת בצורה נקייה ומהירה."
+                }
+            },
+            {
+                id: "alias-game",
+                name: "guess_the_word",
+                title: "נחש את המילה (Alias)",
+                subtitle: "אדפטציה דיגיטלית למשחק המילים הפופולרי",
+                icon: "💬",
+                category: "games",
+                lang: "HTML / JS",
+                theme: "pink",
+                desc: "גרסה דיגיטלית למשחק 'אליאס' / 'טאבו': חלוקה לקבוצות, הגדרת זמנים, מילים אסורות ומאגר מילים מגוון בעברית למשחק ממכשיר משותף.",
+                tags: ["Alias", "משחק מילים", "טיימר", "מכשיר משותף"],
+                liveUrl: "https://shellywsas.github.io/guess_the_word/",
+                repoUrl: "https://github.com/shellywsas/guess_the_word",
+                interview: {
+                    problem: "משחק קופסה של מילים בדרך כלל דורש כרטיסיות פיזיות ושעון חול; האפליקציה מחליפה את הכל בסמארטפון אחד.",
+                    stack: "JavaScript, טיימר קולי, בנק מילים עשיר מסווג לפי רמות קושי.",
+                    highlights: "ממשק מחוות מגע מהיר להעברת מילה או סימון הצלחה."
+                }
+            },
+
+            // FULL-STACK & TOOLS
+            {
+                id: "volley-check",
+                name: "weather",
+                title: "VolleyCheck - רוחות ומזג אוויר",
+                subtitle: "ניטור נתוני רוח ומזג אוויר בזמן אמת לחופי תל אביב",
+                icon: "💨",
+                category: "tools",
+                lang: "JavaScript / APIs",
+                theme: "cyan",
+                desc: "אפליקציה מקצועית המחוברת ל-APIs של מזג אוויר ורוחות בזמן אמת: מהירות רוח (קשר/קמ״ש), כיוון הרוח, גובה גלים וטמפרטורה, שפותחה עבור ספורטאי כדורעף חופים לקבלת החלטות לפני אימון.",
+                tags: ["Weather API", "Real-Time Data", "כדורעף חופים", "רוחות"],
+                liveUrl: "https://shellywsas.github.io/weather/",
+                repoUrl: "https://github.com/shellywsas/weather",
+                interview: {
+                    problem: "שחקני כדורעף חופים תלויים לחלוטין בתנאי הרוח והים; אפליקציות מזג אוויר כלליות אינן מציגות את הנתונים המדויקים והספציפיים לחוף.",
+                    stack: "Fetch API לשאיבת נתוני מזג אוויר חיים, המרת יחידות מדידה פיזיקליות, ומצפן כיווני רוח גרפי.",
+                    highlights: "חישוב אינדקס תנאי משחק (Playability Score) הממליץ לשחקן האם התנאים מתאימים לאימון."
+                }
+            },
+            {
+                id: "coach-libi",
+                name: "coach_libi",
+                title: "Coach Libi - המאמנת",
+                subtitle: "פלטפורמת מערכי חימום ותרגול לכדורעף",
+                icon: "📋",
+                category: "tools",
+                lang: "HTML / JS",
+                theme: "orange",
+                desc: "מערכת ניהול והדרכה למאמני כדורעף חופים: תוכניות חימום דינמיות, תרגילי זריזות וכוח ייעודיים לחול, ותרשימי תרגול טקטיים בשטח.",
+                tags: ["Coaching Dashboard", "כדורעף חופים", "מערכי אימון", "ספורט"],
+                liveUrl: "https://shellywsas.github.io/coach_libi/",
+                repoUrl: "https://github.com/shellywsas/coach_libi",
+                interview: {
+                    problem: "מאמנים נדרשים לנהל אימונים בשטח ללא נשיאת קלסרים או דפים מודפסים שעלולים להירטב או להתעופף ברוח.",
+                    stack: "JavaScript, תצוגה מותאמת שמש (High Contrast Mode) לקריאה נוחה בחוף, ומערך תרגילים מודולרי.",
+                    highlights: "חלוקת תרגילים לפי מטרת האימון (הגנה, הנחתות, קבלה) עם טיימרים פנימיים."
+                }
+            },
+            {
+                id: "tv-shows",
+                name: "TVshows",
+                title: "מעקב סדרות וסרטים",
+                subtitle: "אפליקציה אישית לקטלוג וניהול צפייה",
+                icon: "📺",
+                category: "tools",
+                lang: "HTML / JS",
+                theme: "slate",
+                desc: "מערכת אישית לניהול מעקב סדרות, עונות ופרקים: סימון פרקים שנצפו, דירוג אישי, ניהול רשימת Watchlist וסינון לפי ז'אנרים.",
+                tags: ["Catalog", "Watchlist", "Local Storage", "Filtering"],
+                liveUrl: "https://shellywsas.github.io/TVshows/",
+                repoUrl: "https://github.com/shellywsas/TVshows",
+                interview: {
+                    problem: "מעקב נוח וקל אחרי התקדמות בסדרות טלוויזיה ללא צורך בהרשמה מסורבלת לשירותי צד שלישי.",
+                    stack: "וונילה JS, שמירה ב-LocalStorage, ועיצוב כרטיסיות נקי.",
+                    highlights: "ממשק מהיר במיוחד המאפשר לסמן צפייה בפרק בלחיצת כפתור אחת."
+                }
+            },
+
+            // LANGUAGES & PSYCHOMETRIC
+            {
+                id: "psychometric-portal",
+                name: "Psychometric-",
+                title: "PsychoMaster בענן",
+                subtitle: "פלטפורמה מקיפה לניהול ומעקב הכנה לפסיכומטרי",
+                icon: "🎓",
+                category: "languages",
+                lang: "HTML / JS",
+                theme: "rose",
+                desc: "פלטפורמת ענק (מעל 160KB קוד): ניהול לו״ז שבועי לקורס, מחשבון ציון פסיכומטרי משוקלל, מערכת משימות אישית ותרגולים ממוקדים לכל חלקי הבחינה.",
+                tags: ["פסיכומטרי", "מחשבון ציון", "ניהול משימות", "EdTech"],
+                liveUrl: "https://shellywsas.github.io/Psychometric-/",
+                repoUrl: "https://github.com/shellywsas/Psychometric-",
+                interview: {
+                    problem: "הכנה לפסיכומטרי דורשת ניהול לו״ז קפדני, מעקב ציוני סימולציה ותרגול עקבי של מיומנויות חשיבה.",
+                    stack: "JavaScript, אלגוריתם שקלול ציונים מותאם למרכז הארצי, ניהול משימות מלא ומערכת מעקב התקדמות.",
+                    highlights: "מערכת שלמה הפועלת בצד הלקוח בצורה אמינה ומהירה ללא תלות בשרת חיצוני."
+                }
+            },
+            {
+                id: "psychometric-words",
+                name: "PsychometricWords",
+                title: "פסיכו-ווקאב (PsychoVocab)",
+                subtitle: "למידה חכמה של אוצר מילים לפסיכומטרי",
+                icon: "🗂️",
+                category: "languages",
+                lang: "HTML / JS",
+                theme: "pink",
+                desc: "מערכת כרטיסיות ושינון מתקדמת (מעל 150KB קוד): לימוד מילים פסיכומטריות מורכבות דרך סיפורים קצרים, דוגמאות לאנלוגיות מילוליות ומעקב שליטה אישי.",
+                tags: ["Flashcards", "פסיכומטרי", "אוצר מילים", "כרטיסיות"],
+                liveUrl: "https://shellywsas.github.io/PsychometricWords/",
+                repoUrl: "https://github.com/shellywsas/PsychometricWords",
+                interview: {
+                    problem: "שינון אלפי מילים עבריות לפסיכומטרי הוא אחד האתגרים הקשים ביותר, ודפי מילים מודפסים אינם יוצרים זיכרון פעיל.",
+                    stack: "JavaScript, כרטיסיות היפוך אינטראקטיביות, מנגנון חזרות מרווחות (Spaced Repetition logic).",
+                    highlights: "שילוב המילים בתוך משפטים וסיפורים קצרים המאפשרים לזכור את המשמעות בהקשר."
+                }
+            },
+            {
+                id: "giver-words",
+                name: "theGiverWords",
+                title: "The Giver Vocabulary",
+                subtitle: "פורטל אוצר מילים לבגרות באנגלית",
+                icon: "📖",
+                category: "languages",
+                lang: "HTML / JS",
+                theme: "slate",
+                desc: "פורטל מקיף לתרגול ושינון מילות החובה מתוך הספר 'The Giver' לבגרות 5 יח״ל באנגלית: חלוקה לפי פרקים, הקשר בטקסט, תרגום ומבחני ידע קצרים.",
+                tags: ["אנגלית 5 יח״ל", "The Giver", "אוצר מילים", "ספרות"],
+                liveUrl: "https://shellywsas.github.io/theGiverWords/",
+                repoUrl: "https://github.com/shellywsas/theGiverWords",
+                interview: {
+                    problem: "הכנה לשאלות ספרות באנגלית דורשת שליטה באוצר מילים ייחודי מתוך היצירה.",
+                    stack: "וונילה JS, מאגר מילים מובנה לפי פרקים עם משוב מיידי.",
+                    highlights: "כלי ששימש בהצלחה תלמידי תיכון בהכנה למבחני הבגרות באנגלית."
+                }
+            },
+            {
+                id: "hebrew-quiz",
+                name: "quiz_Hebrew",
+                title: "פורטל למידה - לשון עברית",
+                subtitle: "תרגול ממוקד לבגרות בלשון והבעה",
+                icon: "✍️",
+                category: "languages",
+                lang: "HTML / JS",
+                theme: "teal",
+                desc: "מאגר שאלות דינמי לתרגול לקראת הבגרות בלשון: מערכת הצורות, זיהוי בניינים וגזרות מורכבות, שם המספר ותחביר, עם הסברים מפורטים.",
+                tags: ["לשון עברית", "בגרות בלשון", "מערכת הצורות", "חידון"],
+                liveUrl: "https://shellywsas.github.io/quiz_Hebrew/",
+                repoUrl: "https://github.com/shellywsas/quiz_Hebrew",
+                interview: {
+                    problem: "הבנת גזרות ובניינים בלשון דורשת תרגול פעיל של שאלות עם בדיקת תשובה מיידית.",
+                    stack: "JavaScript, מנוע בדיקת תשובות והסברים דקדוקיים מפורטים.",
+                    highlights: "ממשק פשוט וישיר המאפשר להתאמן בכל מקום ישירות מהטלפון."
+                }
+            }
+        ];
+
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initCategoriesCounts();
+            renderFlagshipProjects();
+            renderProjects();
+            lucide.createIcons();
+        });
+
+        function initCategoriesCounts() {
+            document.getElementById('count-all').textContent = projects.length;
+            document.getElementById('stat-total').textContent = projects.length;
+            document.getElementById('results-count').textContent = projects.length;
+        }
+
+        function renderFlagshipProjects() {
+            const container = document.getElementById('flagship-container');
+            const flagships = projects.filter(p => p.isFlagship);
+            
+            container.innerHTML = flagships.map(p => {
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(p.liveUrl)}&margin=6`;
+                return `
+                    <div class="project-card p-6 border-purple-500/30 group hover:border-purple-400">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">${p.icon}</span>
+                                <div>
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">⭐ פרויקט דגל</span>
+                                    <h4 class="text-lg font-black text-white group-hover:text-purple-300 transition-colors mt-0.5">${p.title}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4 flex-grow">
+                            ${p.desc}
+                        </p>
+
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            ${p.tags.slice(0, 3).map(tag => `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-800/80 text-purple-300 border border-slate-700/60">${tag}</span>`).join('')}
+                        </div>
+
+                        <!-- Card Action Bar -->
+                        <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80 mt-auto">
+                            <!-- QR Thumbnail with Click & Hover Zoom -->
+                            <div class="relative group/qr shrink-0 cursor-pointer" onclick="openQrModal('${encodeURIComponent(p.title)}', '${encodeURIComponent(p.liveUrl)}')">
+                                <img src="${qrUrl}" alt="QR" class="w-10 h-10 rounded-lg p-0.5 bg-white border border-slate-600 transition-transform hover:scale-110 shadow-sm" title="לחצו להגדלה וסריקה לטלפון">
+                            </div>
+
+                            <!-- Live App Button -->
+                            <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                <span>הדגמה חיה</span>
+                            </a>
+
+                            <!-- GitHub Code Button -->
+                            <a href="${p.repoUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 border border-slate-700/60" title="קוד מקור ב-GitHub">
+                                <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                <span>Code</span>
+                            </a>
+
+                            <!-- Pitch Modal Button -->
+                            <button onclick="openInterviewModal('${p.id}')" class="p-2 bg-purple-950/60 hover:bg-purple-900/80 text-purple-300 rounded-xl transition-all border border-purple-800/50" title="דגשים לראיון">
+                                <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countEl = document.getElementById('results-count');
+
+            const filtered = projects.filter(p => {
+                const matchCat = (currentCategory === 'all') || 
+                                 (currentCategory === 'flagship' && p.isFlagship) ||
+                                 (p.category === currentCategory);
+                
+                if (!matchCat) return false;
+
+                if (!currentSearchQuery) return true;
+
+                const q = currentSearchQuery.toLowerCase();
+                const matchText = p.title.toLowerCase().includes(q) ||
+                                  p.desc.toLowerCase().includes(q) ||
+                                  p.name.toLowerCase().includes(q) ||
+                                  p.lang.toLowerCase().includes(q) ||
+                                  p.tags.some(t => t.toLowerCase().includes(q));
+
+                return matchText;
+            });
+
+            countEl.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(p => {
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(p.liveUrl)}&margin=6`;
+                
+                return `
+                    <div class="project-card p-5 group">
+                        <!-- Top Header -->
+                        <div class="flex items-start justify-between gap-3 mb-2.5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-slate-800/90 border border-slate-700/60 flex items-center justify-center text-2xl shrink-0 group-hover:scale-105 transition-transform">
+                                    ${p.icon}
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-bold text-white group-hover:text-purple-300 transition-colors leading-snug">${p.title}</h4>
+                                    <span class="text-[11px] text-slate-400 block">${p.subtitle || p.lang}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4 flex-grow">
+                            ${p.desc}
+                        </p>
+
+                        <!-- Tags -->
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            ${p.tags.map(t => `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-900/90 text-slate-300 border border-slate-800">${t}</span>`).join('')}
+                        </div>
+
+                        <!-- Action Bar -->
+                        <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80 mt-auto">
+                            <!-- QR Code with Click-to-Enlarge -->
+                            <div class="relative group/qr shrink-0 cursor-pointer" onclick="openQrModal('${encodeURIComponent(p.title)}', '${encodeURIComponent(p.liveUrl)}')">
+                                <img src="${qrUrl}" alt="QR" class="w-10 h-10 rounded-lg p-0.5 bg-white border border-slate-600 transition-transform hover:scale-110 shadow-sm" title="לחצו להגדלה וסריקה">
+                            </div>
+
+                            <!-- Live App Link -->
+                            <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                <span>הדגמה חיה</span>
+                            </a>
+
+                            <!-- GitHub Code Link -->
+                            <a href="${p.repoUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 border border-slate-700/60" title="קוד מקור ב-GitHub">
+                                <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                <span>קוד</span>
+                            </a>
+
+                            <!-- Interview Deep Dive Button -->
+                            <button onclick="openInterviewModal('${p.id}')" class="px-2.5 py-2 bg-purple-950/60 hover:bg-purple-900/80 text-purple-300 rounded-xl text-xs font-bold transition-all border border-purple-800/50 flex items-center gap-1" title="תקציר לראיון">
+                                <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
+                                <span class="hidden sm:inline">ראיון</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-purple-600', 'text-white');
+                btn.classList.add('bg-slate-900/90', 'text-slate-300');
+            });
+
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-purple-600', 'text-white');
+                activeBtn.classList.remove('bg-slate-900/90', 'text-slate-300');
+            }
+
+            renderProjects();
+        }
+
+        function onSearchChange(val) {
+            currentSearchQuery = val.trim();
+            const clearBtn = document.getElementById('clear-search-btn');
+            if (currentSearchQuery) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            renderProjects();
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            currentSearchQuery = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            setCategory('all');
+        }
+
+        function openInterviewModal(projectId) {
+            const p = projects.find(item => item.id === projectId);
+            if (!p) return;
+
+            document.getElementById('modal-icon').textContent = p.icon;
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-cat').textContent = p.category.toUpperCase();
+            document.getElementById('modal-lang').textContent = p.lang;
+            document.getElementById('modal-problem').textContent = p.interview.problem;
+            document.getElementById('modal-stack').textContent = p.interview.stack;
+            document.getElementById('modal-highlights').textContent = p.interview.highlights;
+
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(p.liveUrl)}&margin=8`;
+            document.getElementById('modal-qr').src = qrUrl;
+
+            document.getElementById('modal-live-btn').href = p.liveUrl;
+            document.getElementById('modal-repo-btn').href = p.repoUrl;
+
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = p.tags.map(t => `<span class="px-2 py-0.5 rounded-md bg-purple-950 text-purple-300 border border-purple-800/60 text-xs">${t}</span>`).join('');
+
+            document.getElementById('interview-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeInterviewModal() {
+            document.getElementById('interview-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openQrModal(encodedTitle, encodedUrl) {
+            const title = decodeURIComponent(encodedTitle);
+            const url = decodeURIComponent(encodedUrl);
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}&margin=10`;
+
+            document.getElementById('qr-modal-title').textContent = title;
+            document.getElementById('qr-modal-img').src = qrUrl;
+            
+            const linkEl = document.getElementById('qr-modal-link');
+            linkEl.href = url;
+            linkEl.textContent = url;
+
+            document.getElementById('qr-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeQrModal() {
+            document.getElementById('qr-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openShareModal() {
+            document.getElementById('share-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeShareModal() {
+            document.getElementById('share-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function copyShareUrl() {
+            const input = document.getElementById('share-url-input');
+            navigator.clipboard.writeText(input.value);
+            const btnText = document.getElementById('copy-btn-text');
+            btnText.textContent = 'הועתק!';
+            setTimeout(() => {
+                btnText.textContent = 'העתק';
+            }, 2000);
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeInterviewModal();
+                closeQrModal();
+                closeShareModal();
+            }
+        });
+    </script>
+</body>
+</html>
